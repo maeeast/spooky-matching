@@ -1,0 +1,182 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000 url(/img/spooky-moon.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Special Elite', cursive;
+    color: #FDF7EC;
+    text-shadow: 2px 2px 5px #888;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: radial-gradient(#BC3908, #F3C77C);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49 url(/img/jack.jpg);
+    background-size: cover;
+    font-size: 0;
+    color: #F3C77C;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #574474;
+    cursor: default;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #201D20;
+    font-size: 33px;
+}
+
+.score-panel {
+    font-size: 22px;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    display: flex;
+    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    cursor: pointer;
+}
+
+.score-panel .timer {
+    margin-right: 40px;
+    float: left;
+}
+
+.results_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.results_body {
+    border-radius: 10px;
+    position: relative;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    background: #FDF7EC;
+    transform: translate(-50%, -70%);
+}
+
+.results_heading {
+    color: #000;
+    display: flex;
+    text-shadow: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid gray;
+}
+
+.results_close {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.results_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    color: #000;
+    text-shadow: none;
+    border-bottom: 1px solid gray;
+}
+
+.results_buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.results_button {
+    width: 100px;
+    height: 30px;
+    font-family: 'Special Elite', cursive;
+}
+
+.hide {
+    display: none;
+}
