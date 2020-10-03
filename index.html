@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Matching Game</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css" integrity="sha384-OLYO0LymqQ+uHXELyx93kblK5YIS3B2ZfLGBmsJaUyor7CpMTBsahDHByqSuWW+q" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Special+Elite">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+ <div class="container">
+        <header>
+            <h1>Matching Game</h1>
+        </header>
+
+        <section class="score-panel">
+            <span class="timer">0:00</span>
+            <ul class="stars">
+        		<li><i class="fas fa-skull-crossbones"></i></li>
+        		<li><i class="fas fa-skull-crossbones"></i></li>
+        		<li><i class="fas fa-skull-crossbones"></i></li>
+        	</ul>
+
+        	<span class="moves">0</span> Picks
+
+            <div class="restart">
+        		<i class="fas fa-redo"></i>
+        	</div>
+        </section>
+
+        <ul class="deck">
+            <li class="card">
+                <i class="fas fa-book-dead"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-broom"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-cloud-moon"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bolt"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-ghost"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-cloud-moon"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-hat-wizard"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-spider"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-book-dead"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-mask"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-hat-wizard"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-mask"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bolt"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-spider"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-broom"></i>
+            </li>
+            <li class="card">
+                <i class="fas fa-ghost"></i>
+            </li>
+        </ul>
+
+        <div class="results_background hide">
+            <div class="results_body">
+                <div class="results_heading">
+                    <h1 class="results_title">You Win!</h1>
+                    <span class="results_close">X</span>
+                </div>
+                <div class="results_list">
+                    <span class="results_time">Time: </span>
+                    <span class="results_moves">Moves: 555</span>
+                    <span class="results_stars">Stars Earned: 55</span>
+
+                </div>
+                <div class="results_buttons">
+                    <button class="results_button results_cancel">Cancel</button>
+                    <button class="results_button results_try_again">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
