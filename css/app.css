@@ -17,12 +17,30 @@ body {
 }
 
 body {
-    background: #000 url(../img/spooky-moon.gif);
+    background: #000 url(/img/spooky-moon.gif);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Special Elite', cursive;
     color: #FDF7EC;
     text-shadow: 2px 2px 5px #888;
+}
+
+#lightning {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.85);
+    opacity: 0;
+    animation: bolt .25s;
+    animation-delay: .5s;
+    animation-iteration-count: 2;
+}
+
+@keyframes bolt {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .container {
@@ -53,7 +71,7 @@ body {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49 url(../img/jack.jpg);
+    background: #2e3d49 url(/img/jack.jpg);
     background-size: cover;
     font-size: 0;
     color: #F3C77C;
@@ -99,14 +117,14 @@ body {
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
+.score-panel .skulls {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.score-panel .skulls li {
     list-style: none;
     display: inline-block;
 }
@@ -121,6 +139,7 @@ body {
 }
 
 .results_background {
+    z-index: 100;
     position: absolute;
     top: 0;
     left: 0;
@@ -149,9 +168,14 @@ body {
     border-bottom: 1px solid gray;
 }
 
-.results_close {
+span.results_close {
     font-weight: bold;
-    font-size: 2rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+span.results_close:hover {
+    color: #555;
+    transition: ease-in-out .25s;
 }
 
 .results_list {
@@ -167,14 +191,22 @@ body {
 .results_buttons {
     display: flex;
     justify-content: space-around;
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: 8px;
 }
 
 .results_button {
     width: 100px;
     height: 30px;
+    background-color: #F3C77C;
+    border-radius: 5px;
     font-family: 'Special Elite', cursive;
+    cursor: pointer;
+}
+
+.results_button:hover {
+    background-color: #e6bd76;
+    transition: ease-in-out .25s;
 }
 
 .hide {

@@ -7,7 +7,10 @@ let time = 0;
 let timerId;
 const totalPairs = 8;
 
-
+function playSound(url) {
+    const audio = new Audio(url);
+    audio.play();
+  }
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -109,15 +112,15 @@ function addPick(){
 
 function checkPicks() {
     if (picks === 16 || picks === 24) {
-        hideStar();
+        hideSkull();
     }
 }
 
-function hideStar(){
-    const starList = document.querySelectorAll('.stars li')
-    for (star of starList) {
-        if (star.style.display !== 'none') {
-            star.style.display = 'none';
+function hideSkull(){
+    const skullList = document.querySelectorAll('.skulls li')
+    for (skull of skullList) {
+        if (skull.style.display !== 'none') {
+            skull.style.display = 'none';
             break;
         }
     }
@@ -125,9 +128,11 @@ function hideStar(){
 
 function refreshGame() {
     refreshPicks();
-    refreshStars();
+    refreshSkulls();
     shuffleDeck();
     refreshCards();
+    window.location.reload();
+    return false;
 }
 
 function refreshPicks() {
@@ -135,11 +140,11 @@ function refreshPicks() {
     document.querySelector('.moves').innerHTML = picks;
 }
 
-function refreshStars(){
-    stars = 0;
-    const   starList = document.querySelectorAll('.stars li');
-    for (star of starList) {
-        star.style.display = 'inline';
+function refreshSkulls(){
+    skulls = 0;
+    const   skullList = document.querySelectorAll('.skulls li');
+    for (skull of skullList) {
+        skull.style.display = 'inline';
     }
 }
 
@@ -175,43 +180,65 @@ function stopTimer(){
 function showResults () {
     const results = document.querySelector('.results_background');
     results.classList.toggle('hide');
+
 }
 
 function getResults () {
     const clockTime = document.querySelector('.timer').innerHTML;
-    const score = getStars();
+    const score = getSkulls();
     const timeStat = document.querySelector('.results_time');
     const moveStat = document.querySelector('.results_moves');
-    const starStat = document.querySelector('.results_stars');
+    const skullStat = document.querySelector('.results_skulls');
 
 
     timeStat.innerHTML = `Time: ${clockTime}`;
     moveStat.innerHTML = `Moves: ${picks}`;
-    starStat.innerHTML = `Stars: ${score}`;
+    skullStat.innerHTML = `Skulls: ${score}`;
 }
 
-function getStars() {
-    stars = document.querySelectorAll('.stars li');
-    starCount = 0;
-    for (star of stars) {
-        if (star.style.display !== "none"){
-            starCount++;
+function getSkulls() {
+    skulls = document.querySelectorAll('.skulls li');
+    skullCount = 0;
+    for (skull of skulls) {
+        if (skull.style.display !== "none"){
+            skullCount++;
         }
     }
-    return starCount;
+    return skullCount;
+}
+
+function lightningOverlay() {
+    const div = document.createElement('div');
+    div.setAttribute('id', 'lightning');
+    document.body.appendChild(div);
+}
+
+function clearLightning() {
+    const element = document.querySelector('#lightning');
+    element.remove();
 }
 
 function allDone() {
+    lightningOverlay();
+    playSound("/sound/thunder.mp3");
     stopTimer();
     getResults();
     showResults();
+    // document.querySelector('.lightning').classList.remove('lightning-strike');
 }
 
-document.querySelector('.results_cancel, .results_close').addEventListener('click', () => {
+document.querySelector('.results_close').addEventListener('click', () => {
     showResults();
+    clearLightning();
+});
+
+document.querySelector('.results_cancel').addEventListener('click', () => {
+    showResults();
+    clearLightning();
 });
 
 document.querySelector('.results_try_again').addEventListener('click', () => {
     refreshGame();
     showResults();
+    clearLightning();
 });
