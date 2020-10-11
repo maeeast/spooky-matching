@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #000 url(/img/spooky-moon.gif);
+    background: #000 url(img/spooky-moon.gif);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Special Elite', cursive;
@@ -71,7 +71,7 @@ body {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49 url(/img/jack.jpg);
+    background: #2e3d49 url(img/jack.jpg);
     background-size: cover;
     font-size: 0;
     color: #F3C77C;
