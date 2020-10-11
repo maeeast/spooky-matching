@@ -220,7 +220,7 @@ function clearLightning() {
 
 function allDone() {
     lightningOverlay();
-    playSound("/sound/thunder.mp3");
+    playSound("sound/thunder.mp3");
     stopTimer();
     getResults();
     showResults();
