@@ -48,6 +48,7 @@ body {
 }
 
 .container {
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +70,6 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 3em;
 }
 
 .deck .card {
@@ -142,6 +142,12 @@ body {
   float: left;
 }
 
+.modal_container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 .results_background {
   z-index: 100;
   position: absolute;
@@ -152,7 +158,17 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.results_body {
+.instructions_background {
+  z-index: 200;
+  position: absolute;
+  top: 1;
+  left: 1;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.results_body, .instructions_body {
   border-radius: 10px;
   position: relative;
   width: 400px;
@@ -172,12 +188,19 @@ body {
   border-bottom: 1px solid gray;
 }
 
-span.results_close {
+.instructions_heading {
+  color: #000;
+  display: flex;
+  text-shadow: none;
+  justify-content: center;
+}
+
+span.results_close, span.instructions_start {
   font-weight: bold;
   cursor: pointer;
   font-size: 1.5rem;
 }
-span.results_close:hover {
+span.results_close:hover, span.instructions_start:hover {
   color: #555;
   transition: ease-in-out 0.25s;
 }
@@ -192,14 +215,21 @@ span.results_close:hover {
   border-bottom: 1px solid gray;
 }
 
-.results_buttons {
+.instructions_text {
+  padding: 0 1rem;
+  color: #000;
+  text-shadow: none;
+  text-align: center;
+}
+
+.results_buttons, .instructions_buttons {
   display: flex;
   justify-content: space-around;
   padding: 1.25rem;
   border-radius: 8px;
 }
 
-.results_button {
+.results_button, .instructions_button {
   width: 100px;
   height: 30px;
   background-color: #f3c77c;
@@ -208,11 +238,17 @@ span.results_close:hover {
   cursor: pointer;
 }
 
-.results_button:hover {
+.results_button:hover, .instructions_button:hover {
   background-color: #e6bd76;
   transition: ease-in-out 0.25s;
 }
 
 .hide {
   display: none;
+}
+
+
+.audio_controls {
+  display: flex;
+  justify-content: center;
 }

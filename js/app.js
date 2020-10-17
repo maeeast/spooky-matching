@@ -6,12 +6,16 @@ let time = 0;
 let timerId;
 const totalPairs = 8;
 
-function playSound(url) {
+window.onload = () => {
+  toggleInstructions();
+}
+
+const playSound = url => {
   const audio = new Audio(url);
   audio.play();
 }
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
+const shuffle = array => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -45,7 +49,7 @@ deck.addEventListener("click", () => {
       checkPicks();
     }
     if (pairs === totalPairs) {
-      allDone();
+      youWin();
     }
     if (timerOff) {
       startTimer();
@@ -54,11 +58,42 @@ deck.addEventListener("click", () => {
   }
 });
 
+const shuffleDeck = () => {
+  const shuffleUs = Array.from(document.querySelectorAll(".deck li"));
+  const mixItUp = shuffle(shuffleUs);
+  for (card of mixItUp) {
+    deck.appendChild(card);
+  }
+}
+
+const refreshGame = () => {
+  refreshPicks();
+  refreshSkulls();
+  shuffleDeck();
+  refreshCards();
+  refreshTimer();
+}
+
+
 shuffleDeck();
 
 document.querySelector(".restart").addEventListener("click", refreshGame);
 
-function okToClick(clickTarget) {
+const toggleInstructions = () =>{
+  const instructions = document.querySelector(".instructions_background");
+  instructions.classList.toggle("hide");
+}
+
+const clearInstructions = () =>{
+  const instructions = document.querySelector(".instructions_background");
+  instructions.parentNode.removeChild(instructions);
+}
+
+document.querySelector(".instructions_start").addEventListener("click", () => {
+  clearInstructions();
+});
+
+const okToClick = clickTarget => {
   return (
     clickTarget.classList.contains("card") &&
     !clickTarget.classList.contains("match") &&
@@ -66,17 +101,16 @@ function okToClick(clickTarget) {
     !selectedCards.includes(clickTarget)
   );
 }
-
-function selectCard(clickTarget) {
+const selectCard = clickTarget => {
   clickTarget.classList.toggle("open");
   clickTarget.classList.toggle("show");
 }
 
-function addSelectCard(clickTarget) {
+const addSelectCard = clickTarget => {
   selectedCards.push(clickTarget);
 }
 
-function areWeTwinning() {
+const areWeTwinning = () => {
   if (
     selectedCards[0].firstElementChild.className ===
     selectedCards[1].firstElementChild.className
@@ -94,27 +128,22 @@ function areWeTwinning() {
   }
 }
 
-function shuffleDeck() {
-  const shuffleUs = Array.from(document.querySelectorAll(".deck li"));
-  const mixItUp = shuffle(shuffleUs);
-  for (card of mixItUp) {
-    deck.appendChild(card);
-  }
-}
-
-function addPick() {
+const addPick = () => {
   picks++;
   const pickText = document.querySelector(".moves");
   pickText.innerHTML = picks;
 }
 
-function checkPicks() {
+const checkPicks = () => {
   if (picks === 16 || picks === 24) {
     hideSkull();
+  } else if (picks === 32) {
+    hideSkull();
+    youLose();
   }
 }
 
-function hideSkull() {
+const hideSkull = () => {
   const skullList = document.querySelectorAll(".skulls li");
   for (skull of skullList) {
     if (skull.style.display !== "none") {
@@ -124,21 +153,20 @@ function hideSkull() {
   }
 }
 
-function refreshGame() {
-  refreshPicks();
-  refreshSkulls();
-  shuffleDeck();
-  refreshCards();
-  window.location.reload();
-  return false;
+const refreshTimer = () => {
+  timerOff = true;
+  time = 0;
+  clearInterval(timerId);
+  const timer = document.querySelector(".timer");
+  timer.innerHTML = `0:0${time}`;
 }
 
-function refreshPicks() {
+const refreshPicks = () => {
   picks = 0;
   document.querySelector(".moves").innerHTML = picks;
 }
 
-function refreshSkulls() {
+const refreshSkulls = () => {
   skulls = 0;
   const skullList = document.querySelectorAll(".skulls li");
   for (skull of skullList) {
@@ -146,21 +174,21 @@ function refreshSkulls() {
   }
 }
 
-function refreshCards() {
+const refreshCards = () => {
+  pairs=0;
   const cards = document.querySelectorAll(".deck li");
   for (let card of cards) {
     card.className = "card";
   }
 }
-
-function startTimer() {
+const startTimer = () => {
   timerId = setInterval(() => {
     time++;
     showTime();
   }, 1000);
 }
 
-function showTime() {
+const showTime = () => {
   const timer = document.querySelector(".timer");
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -171,16 +199,16 @@ function showTime() {
   }
 }
 
-function stopTimer() {
+const stopTimer = () => {
   clearInterval(timerId);
 }
 
-function showResults() {
+const showResults = () => {
   const results = document.querySelector(".results_background");
   results.classList.toggle("hide");
 }
 
-function getResults() {
+const getResults = () => {
   const clockTime = document.querySelector(".timer").innerHTML;
   const score = getSkulls();
   const timeStat = document.querySelector(".results_time");
@@ -192,7 +220,7 @@ function getResults() {
   skullStat.innerHTML = `Skulls: ${score}`;
 }
 
-function getSkulls() {
+const getSkulls = () => {
   skulls = document.querySelectorAll(".skulls li");
   skullCount = 0;
   for (skull of skulls) {
@@ -203,24 +231,35 @@ function getSkulls() {
   return skullCount;
 }
 
-function lightningOverlay() {
+const lightningOverlay = () => {
   const div = document.createElement("div");
   div.setAttribute("id", "lightning");
   document.body.appendChild(div);
 }
 
-function clearLightning() {
+const clearLightning = () => {
   const element = document.querySelector("#lightning");
   element.remove();
 }
 
-function allDone() {
+const allDone = () => {
   lightningOverlay();
   playSound("sound/thunder.mp3");
   stopTimer();
   getResults();
   showResults();
-  // document.querySelector('.lightning').classList.remove('lightning-strike');
+}
+
+const youLose = () => {
+  const title = document.querySelector(".results_title")
+  title.innerHTML = 'You Lose!';
+  allDone();
+}
+
+const youWin = () => {
+  const title = document.querySelector(".results_title")
+  title.innerHTML = 'You Win!';
+  allDone();
 }
 
 document.querySelector(".results_close").addEventListener("click", () => {
