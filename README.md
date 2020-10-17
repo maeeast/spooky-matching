@@ -8,7 +8,7 @@ Introductory HTML/CSS project building a spooky memory matching game.
 
 ## Setup
 
-The starter repo has all of the JS logic but empty HTML and CSS files. The HTML and CSS are removed so that you can follow along with me as I build this game.
+The starter repo has all of the asset files and JS logic but empty HTML and CSS files. The HTML and CSS are removed so that you can follow along with me as I build this game.
 
 #### Step 1
 
